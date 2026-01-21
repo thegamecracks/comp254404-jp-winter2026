@@ -18,7 +18,9 @@ class Scoreboard:
         self.board = [None] * capacity
 
     def __repr__(self) -> str:
-        return f"<{type(self).__name__} board={self.board} num_entries={self.num_entries}>"
+        return (
+            f"<{type(self).__name__} board={self.board} num_entries={self.num_entries}>"
+        )
 
     def __str__(self) -> str:
         return f"[{', '.join(map(str, self.board))}]"
