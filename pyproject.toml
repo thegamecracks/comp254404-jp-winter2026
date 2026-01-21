@@ -11,3 +11,6 @@ authors = [{ name = "thegamecracks" }]
 readme = "README.md"
 dependencies = []
 classifiers = ["Private :: Do Not Upload"]
+
+[dependency-groups]
+dev = ["pytest>=9.0.2"]
