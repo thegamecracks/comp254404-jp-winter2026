@@ -32,7 +32,7 @@
    ...
    ```
 
-For (3.1), you can also use [astral-uv](https://docs.astral.sh/uv/) to set up the environment:
+For step 3.1, you can also use [astral-uv](https://docs.astral.sh/uv/) to set up the environment:
 
 ```sh
 /    $ uv sync
@@ -41,4 +41,5 @@ For (3.1), you can also use [astral-uv](https://docs.astral.sh/uv/) to set up th
 ...
 ```
 
-Note that uv will automatically install the `dev` dependency group in pyproject.toml.
+Note that uv will automatically install the `dev` dependency group in pyproject.toml,
+but it is not required to run any of the labs.
