@@ -1,5 +1,4 @@
-from comp254.lesson2.linkedlists import DoublyLinkedList, SinglyLinkedList
-from comp254.lesson3.linkedlists import CircularlyLinkedList
+from comp254 import CircularlyLinkedList, DoublyLinkedList, SinglyLinkedList
 
 
 def test_slist_is_empty() -> None:
