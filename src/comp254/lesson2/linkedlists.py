@@ -25,8 +25,13 @@ class SinglyLinkedList(Generic[T]):
         return f"[{', '.join(map(repr, self))}]"
 
     def __iter__(self) -> Iterator[T]:
+        frontier = set()  # detect circular references for safety
         current = self.head
         while current is not None:
+            if current in frontier:
+                raise RuntimeError(f"Circular reference detected: {current}")
+
+            frontier.add(current)
             yield current.element
             current = current.next
 
@@ -100,14 +105,24 @@ class DoublyLinkedList(Generic[T]):
         return f"[{', '.join(map(repr, self))}]"
 
     def __iter__(self) -> Iterator[T]:
+        frontier = set()  # detect circular references for safety
         current = self.header.next
         while current is not None and current.next is not None:
+            if current in frontier:
+                raise RuntimeError(f"Circular reference detected: {current}")
+
+            frontier.add(current)
             yield current.element
             current = current.next
 
     def __reversed__(self) -> Iterator[T]:
+        frontier = set()  # detect circular references for safety
         current = self.trailer.prev
         while current is not None and current.prev is not None:
+            if current in frontier:
+                raise RuntimeError(f"Circular reference detected: {current}")
+
+            frontier.add(current)
             yield current.element
             current = current.prev
 
