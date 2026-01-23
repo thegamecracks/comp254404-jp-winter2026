@@ -105,6 +105,12 @@ class DoublyLinkedList(Generic[T]):
             yield current.element
             current = current.next
 
+    def __reversed__(self) -> Iterator[T]:
+        current = self.trailer.prev
+        while current is not None and current.prev is not None:
+            yield current.element
+            current = current.prev
+
     def is_empty(self) -> bool:
         return self.size == 0
 
