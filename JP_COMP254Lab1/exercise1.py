@@ -1,11 +1,11 @@
-from typing import Generic, TypeVar
+from typing import TypeVar
 
 from comp254 import DoublyLinkedList
 
 T = TypeVar("T")
 
 
-class ExtendableDoublyLinkedList(DoublyLinkedList[T], Generic[T]):
+class ExtendableDoublyLinkedList(DoublyLinkedList[T]):
     def extend(self, other: DoublyLinkedList[T]) -> None:
         # Example:
         #     H A B C T ---> H A B C D E F T
