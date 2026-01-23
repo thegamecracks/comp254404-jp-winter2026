@@ -6,26 +6,10 @@ from typing import Final, Generic, Iterator, TypeVar
 T = TypeVar("T")
 
 
-class NoSelfReference(Generic[T]):
-    def __set_name__(self, owner: object, name: str) -> None:
-        self.name = name
-        self._name = f"_{name}"
-
-    def __get__(self, owner: object, type: type) -> T:
-        return getattr(owner, self._name)
-
-    def __set__(self, owner: object, value: T) -> None:
-        if value is owner:
-            raise RuntimeError(
-                f"Cannot assign {self.name!r} to self-reference {value!r}"
-            )
-        setattr(owner, self._name, value)
-
-
 @dataclass(eq=False)  # identity-based hashing and comparisons
 class SingleNode(Generic[T]):
     element: Final[T]
-    next: SingleNode[T] | None = NoSelfReference()  # type: ignore
+    next: SingleNode[T] | None
 
     def __str__(self) -> str:
         if self.next is not None:
