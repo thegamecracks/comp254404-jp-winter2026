@@ -6,7 +6,7 @@ from typing import Final, Generic, Iterator, TypeVar
 T = TypeVar("T")
 
 
-@dataclass
+@dataclass(eq=False)  # identity-based hashing and comparisons
 class SingleNode(Generic[T]):
     element: Final[T]
     next: SingleNode[T] | None
@@ -79,7 +79,7 @@ class SinglyLinkedList(Generic[T]):
         return element
 
 
-@dataclass
+@dataclass(eq=False)  # identity-based hashing and comparisons
 class DoubleNode(Generic[T]):
     element: Final[T]
     prev: DoubleNode[T] | None

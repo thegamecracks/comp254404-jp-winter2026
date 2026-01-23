@@ -6,7 +6,7 @@ from typing import Final, Generic, Iterator, TypeVar
 T = TypeVar("T")
 
 
-@dataclass
+@dataclass(eq=False)  # identity-based hashing and comparisons
 class CircularNode(Generic[T]):
     element: Final[T]
     next: CircularNode[T]
