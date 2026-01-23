@@ -11,6 +11,9 @@ class CircularNode(Generic[T]):
     element: Final[T]
     next: CircularNode[T]
 
+    def __str__(self) -> str:
+        return f"{self.element} => {self.next.element}"
+
 
 class CircularlyLinkedList(Generic[T]):
     def __init__(self) -> None:

@@ -11,6 +11,12 @@ class SingleNode(Generic[T]):
     element: Final[T]
     next: SingleNode[T] | None
 
+    def __str__(self) -> str:
+        if self.next is not None:
+            return f"{self.element} => {self.next.element}"
+        else:
+            return f"{self.element}"
+
 
 class SinglyLinkedList(Generic[T]):
     def __init__(self) -> None:
@@ -89,6 +95,16 @@ class DoubleNode(Generic[T]):
     element: Final[T]
     prev: DoubleNode[T] | None
     next: DoubleNode[T] | None
+
+    def __str__(self) -> str:
+        prev, element, next = self.prev, self.element, self.next
+        if prev is not None and next is not None:
+            return f"{prev.element} <= {element} => {next.element}"
+        elif prev is not None:
+            return f"{prev.element} <= {element}"
+        elif next is not None:
+            return f"{element} => {next.element}"
+        return f"{element}"
 
 
 class DoublyLinkedList(Generic[T]):
