@@ -14,7 +14,6 @@ class CloneableCircularlyLinkedList(CircularlyLinkedList[T]):
 
         return copy
 
-
     def _iter_nodes(self) -> Iterator[CircularNode[T]]:
         if self.tail is None:
             return
