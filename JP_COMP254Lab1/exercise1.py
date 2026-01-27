@@ -44,16 +44,16 @@ def main() -> None:
     L.add_last(1)
     L.add_last(2)
     L.add_last(3)
-    print("L:", L)
+    print("L:         ", L)
 
     M = ExtendableDoublyLinkedList[int]()
     M.add_last(4)
     M.add_last(5)
     M.add_last(6)
-    print("M:", M)
+    print("M:         ", M)
 
     L.extend(M)
-    print("M:", M)
+    print("M:         ", M)
     print("L extended:", L)
 
     print("L reversed:", list(reversed(L)))
