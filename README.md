@@ -1,5 +1,16 @@
 # comp254404-jp-winter2026
 
+## Structure
+
+Project directories are located in the repository root. Each project contains
+one or more Python scripts that can be run to perform a specific exercise or step,
+e.g. `python exercise1.py`.
+
+However, there are shared modules contained in an `src` directory providing
+my translations of data structures, and those modules need to be available
+to Python in order for the scripts to run correctly. See [Setup](#setup) below
+for instructions.
+
 ## Setup
 
 1. Install [Python](https://www.python.org/downloads/) 3.11 or newer
