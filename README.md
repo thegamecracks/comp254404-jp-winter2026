@@ -13,6 +13,10 @@ for instructions.
 
 ## Setup
 
+This section describes a few different setups that can be followed.
+The steps below are the preferred method, but alternative setups can be
+followed if they are more convenient.
+
 1. Install [Python](https://www.python.org/downloads/) 3.11 or newer
 2. Clone this repository and open a terminal inside it
 3. Create a virtual environment and install the package into it (venv+pip):
