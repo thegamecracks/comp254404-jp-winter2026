@@ -57,14 +57,15 @@ is undesirable.
 ### Alternative Setup (uv)
 
 Instead of venv+pip, you can use Astral's [uv](https://docs.astral.sh/uv/) project manager
-which will automatically create the virtual environment and use it:
+which can automatically discover the pyproject.toml file, create the virtual environment,
+and use it to run a given script:
 
 ```sh
-/               $ uv sync
 /               $ cd JP_COMP254Lab1
 /JP_COMP254Lab1 $ uv run exercise1.py
 ...
 ```
 
-uv will automatically install the `dev` dependency group in pyproject.toml,
-but it is not required to run any of the assignments.
+Note that uv's venv creation will install the `dev` dependency group
+in pyproject.toml by default, which currently includes pytest,
+but those dependencies are not required to run any of the scripts.
