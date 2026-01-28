@@ -16,7 +16,7 @@
 
    ```sh
    (.venv) /    $ cd xyz
-   (.venv) /xyz $ python main.py
+   (.venv) /xyz $ python exercise1.py
    ...
    ```
 
@@ -31,8 +31,8 @@ $ set PYTHONPATH=C:\Absoulute\Path\to\src
 $ export PYTHONPATH=/absolute/path/to/src
 
 # Now run python as normal:
-/    $ cd xyz
-/xyz $ python main.py
+/               $ cd JP_COMP254Lab1
+/JP_COMP254Lab1 $ python exercise1.py
 ...
 ```
 
@@ -45,9 +45,9 @@ Instead of venv+pip, you can use Astral's [uv](https://docs.astral.sh/uv/) proje
 which will automatically create the virtual environment and use it:
 
 ```sh
-/    $ uv sync
-/    $ cd xyz
-/xyz $ uv run main.py
+/               $ uv sync
+/               $ cd JP_COMP254Lab1
+/JP_COMP254Lab1 $ uv run exercise1.py
 ...
 ```
 
