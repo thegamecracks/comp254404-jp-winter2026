@@ -3,7 +3,7 @@
 ## Setup
 
 1. Install [Python](https://www.python.org/downloads/) 3.11 or newer
-2. Clone this repository
+2. Clone this repository and open a terminal inside it
 3. Create a virtual environment and install the package into it (venv+pip):
 
    ```sh
