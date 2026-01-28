@@ -69,3 +69,14 @@ and use it to run a given script:
 Note that uv's venv creation will install the `dev` dependency group
 in pyproject.toml by default, which currently includes pytest,
 but those dependencies are not required to run any of the scripts.
+
+## How to Export
+
+To export this repository as a .zip, use the following command:
+
+```sh
+$ git archive main -o main.zip
+```
+
+This produces an archive containing only files tracked by Git and will
+exclude ignored files like the `.venv` and `__pycache__` directories.
