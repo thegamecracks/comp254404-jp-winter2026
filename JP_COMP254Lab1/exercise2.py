@@ -71,11 +71,11 @@ def main() -> None:
 
     assert L.head is not None
     assert L.tail is not None
-    a, b = L.head, L.tail
+    n1, n2 = L.head, L.tail
 
-    L.swap_nodes(a, b)
+    L.swap_nodes(n1, n2)
     print("L swap:", L)
-    L.swap_nodes(a, b)
+    L.swap_nodes(n1, n2)
     print("L swap:", L)
     print()
 
@@ -83,13 +83,13 @@ def main() -> None:
     L.add_last(4)
     print("L add: ", L)
 
-    L.swap_nodes(a, b)
+    L.swap_nodes(n1, n2)
     print("L swap:", L)
     L.swap_nodes(L.tail, L.head)
     print("L swap:", L)
-    L.swap_nodes(b, L.tail)
+    L.swap_nodes(n2, L.tail)
     print("L swap:", L)
-    L.swap_nodes(a, L.tail)
+    L.swap_nodes(n1, L.tail)
     print("L swap:", L)
     print()
 
