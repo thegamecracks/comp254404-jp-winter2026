@@ -30,8 +30,8 @@ followed if they are more convenient.
 4. Navigate to any lab or assignment directory to run the exercises:
 
    ```sh
-   (.venv) /    $ cd xyz
-   (.venv) /xyz $ python exercise1.py
+   (.venv) /               $ cd JP_COMP254Lab1
+   (.venv) /JP_COMP254Lab1 $ python exercise1.py
    ...
    ```
 
