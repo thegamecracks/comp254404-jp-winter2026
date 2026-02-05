@@ -56,6 +56,7 @@ def main() -> None:
     print("M:         ", M)
     print("L extended:", L)
 
+    # Test reverse traversal to verify .prev references
     print("L reversed:", list(reversed(L)))
 
 
