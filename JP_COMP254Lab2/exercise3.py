@@ -1,8 +1,11 @@
+from typing import Sequence
+
+
 def main() -> None:
     ...
 
 
-def unique1(data: list[int]) -> bool:
+def unique1(data: Sequence[int]) -> bool:
     n = len(data)
     for j in range(n):
         for k in range(j + 1, n):
@@ -11,7 +14,7 @@ def unique1(data: list[int]) -> bool:
     return True
 
 
-def unique2(data: list[int]) -> bool:
+def unique2(data: Sequence[int]) -> bool:
     n = len(data)
     temp = sorted(data)  # implied copy, O(n) + O(n log n)
     for j in range(n - 1):
