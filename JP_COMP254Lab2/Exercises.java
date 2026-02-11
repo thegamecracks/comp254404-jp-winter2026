@@ -31,7 +31,10 @@
  */
 class Exercises {
 
-  /** Returns the sum of the integers in given array. */
+  /** Returns the sum of the integers in given array.
+   *  O(n)
+   *  Involves iterating through the array to sum its elements.
+   */
   public static int example1(int[] arr) {
     int n = arr.length, total = 0;
     for (int j=0; j < n; j++)       // loop from 0 to n-1
@@ -39,7 +42,10 @@ class Exercises {
     return total;
   }
 
-  /** Returns the sum of the integers with even index in given array. */
+  /** Returns the sum of the integers with even index in given array.
+   *  O(n)
+   *  Involves iterating through half the elements of the array.
+   */
   public static int example2(int[] arr) {
     int n = arr.length, total = 0;
     for (int j=0; j < n; j += 2)    // note the increment of 2
@@ -47,7 +53,10 @@ class Exercises {
     return total;
   }
 
-  /** Returns the sum of the prefix sums of given array. */
+  /** Returns the sum of the prefix sums of given array.
+   *  O(n**2)
+   *  Involves iterating through 1 + 2 + 3 + ... + n elements.
+   */
   public static int example3(int[] arr) {
     int n = arr.length, total = 0;
     for (int j=0; j < n; j++)       // loop from 0 to n-1
@@ -56,17 +65,23 @@ class Exercises {
     return total;
   }
 
-  /** Returns the sum of the prefix sums of given array. */
+  /** Returns the sum of the prefix sums of given array.
+   *  O(n)
+   *  Involves iterating through the elements of the array.
+   */
   public static int example4(int[] arr) {
     int n = arr.length, prefix = 0, total = 0;
     for (int j=0; j < n; j++) {     // loop from 0 to n-1
-      prefix += arr[j];
-      total += prefix;
+      prefix += arr[j]; // O(1)
+      total += prefix;  // O(1)
     }
     return total;
   }
 
-  /** Returns the number of times second array stores sum of prefix sums from first. */
+  /** Returns the number of times second array stores sum of prefix sums from first.
+   *  O(n**3)
+   *  Involves iterating through 1 + 2 + 3 + ... + n elements, repeated n times.
+   */
   public static int example5(int[] first, int[] second) { // assume equal-length arrays
     int n = first.length, count = 0;
     for (int i=0; i < n; i++) {     // loop from 0 to n-1
