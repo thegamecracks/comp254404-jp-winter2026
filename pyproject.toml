@@ -9,7 +9,9 @@ description = ""
 requires-python = ">=3.11"
 authors = [{ name = "thegamecracks" }]
 readme = "README.md"
-dependencies = []
+dependencies = [
+    "matplotlib~=3.10",
+]
 classifiers = ["Private :: Do Not Upload"]
 
 [dependency-groups]
