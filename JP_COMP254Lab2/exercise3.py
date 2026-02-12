@@ -55,7 +55,7 @@ class OptimalRuntime:
 
     def __str__(self) -> str:
         return (
-            f"Found {self.n:,}/{self.duration:.3f}s after {self.trials:,} "
+            f"Found {self.n:,} / {self.duration:.3f}s after {self.trials:,} "
             f"trials (total time: {self.total_elapsed:.3f}s)"
         )
 
@@ -75,16 +75,31 @@ def find_optimal_runtime(
 
     trials = 0
     elapsed = 0.0
+    last_mid = 0
+    last_elapsed = 0.0
     time_start = time.perf_counter()
+    pad = math.ceil(math.log10(end)) + 2
 
     # Below condition makes end exclusive, range is [start, end)
     while (mid := start + (end - start) // 2) != start:
         trials += 1
+        if last_mid > 0:
+            print(f"  {trials:2d}. {mid:,} ", end="", flush=True)
+        else:
+            print(f"  {trials:2d}. {mid:,} ", end="", flush=True)
 
-        print(f"  {trials:2d}. {mid:,}", end="", flush=True)
         data = generate_unique_data(mid)
         elapsed = timed_call(func, data)
-        print(f" ({elapsed:.3f}s)")
+
+        if last_mid and last_elapsed:
+            diff_mid = mid - last_mid
+            diff_elapsed = elapsed - last_elapsed
+            print(f"/ {elapsed:.3f}s  ({diff_mid:+{pad},d}, {diff_elapsed:+.3f}s)")
+        else:
+            print(f"/ {elapsed:.3f}s")
+
+        last_mid = mid
+        last_elapsed = elapsed
 
         if math.isclose(elapsed, duration, abs_tol=1e-3):  # 1ms tolerance
             break
