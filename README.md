@@ -43,6 +43,24 @@ followed if they are more convenient.
 > Try `pip install --editable .` to update the virtual environment,
 > and then run the desired script again.
 
+### Alternative Setup (uv)
+
+Instead of venv+pip, you can use Astral's [uv](https://docs.astral.sh/uv/) project manager
+which can automatically discover the pyproject.toml file, create the virtual environment,
+and use it to run a given script:
+
+```sh
+/               $ cd JP_COMP254Lab1
+/JP_COMP254Lab1 $ uv run exercise1.py
+...
+```
+
+> [!NOTE]
+>
+> `uv run` will automatically sync the virtual environment whenever there are
+> changed dependencies. However, you can manually synchronize the venv with
+> `uv sync`.
+
 ### Alternative Setup (PYTHONPATH)
 
 Instead of venv+pip, you can set the [PYTHONPATH](https://docs.python.org/3/using/cmdline.html#envvar-PYTHONPATH)
@@ -67,24 +85,6 @@ is undesirable.
 > Some exercises require third-party dependencies and will break
 > when using this method. This can be resolved by following setup
 > instructions for venv+pip or uv.
-
-### Alternative Setup (uv)
-
-Instead of venv+pip, you can use Astral's [uv](https://docs.astral.sh/uv/) project manager
-which can automatically discover the pyproject.toml file, create the virtual environment,
-and use it to run a given script:
-
-```sh
-/               $ cd JP_COMP254Lab1
-/JP_COMP254Lab1 $ uv run exercise1.py
-...
-```
-
-> [!NOTE]
->
-> `uv run` will automatically sync the virtual environment whenever there are
-> changed dependencies. However, you can manually synchronize the venv with
-> `uv sync`.
 
 ## How to Export
 
