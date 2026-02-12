@@ -39,7 +39,7 @@ def unique1(data: Sequence[int]) -> bool:
 
 def unique2(data: Sequence[int]) -> bool:
     n = len(data)
-    temp = sorted(data)  # implied copy, O(n) + O(n log n)
+    temp = sorted(data)  # implied copy, O(n log n) worst-case, O(n) best-case
     for j in range(n - 1):
         if temp[j] == temp[j + 1]:
             return False
