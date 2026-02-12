@@ -10,10 +10,21 @@ DURATION = 1
 
 
 def main() -> None:
+    # Based on the desired duration above, try to guess N where each function's
+    # runtime will match that duration, and then use binary search to emperically
+    # determine N.
+    #
+    # The heuristics below were manually tested on a single system.
+    # On different systems, this may be wildly inaccurate.
+    approx_unique1 = int(math.sqrt(DURATION) * 4500)
+    approx_unique2 = DURATION * 12500000
+    lower_tolerance = 0.15
+    upper_tolerance = 0.15
+
     results = find_optimal_runtime(
         unique1,
-        start=DURATION * 500,  # hint: it's very slow!
-        end=DURATION * 5000,
+        start=int(approx_unique1 * (1 - lower_tolerance)),
+        end=int(approx_unique1 * (1 + upper_tolerance)),
         duration=DURATION,
     )
     print(results)
@@ -21,8 +32,8 @@ def main() -> None:
     print()
     results = find_optimal_runtime(
         unique2,
-        start=DURATION * 10_000_000,
-        end=DURATION * 15_000_000,
+        start=int(approx_unique2 * (1 - lower_tolerance)),
+        end=int(approx_unique2 * (1 + upper_tolerance)),
         duration=DURATION,
     )
     print(results)
