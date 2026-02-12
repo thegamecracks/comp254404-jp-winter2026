@@ -109,8 +109,8 @@ def find_optimal_runtime(
             start = mid
 
     return OptimalRuntime(
-        n=mid,
-        duration=elapsed,
+        n=last_mid,
+        duration=last_elapsed,
         trials=trials,
         total_elapsed=time.perf_counter() - time_start,
     )
