@@ -55,8 +55,8 @@ class OptimalRuntime:
 
     def __str__(self) -> str:
         return (
-            f"Found n = {self.n} => {self.duration:.3f}s after {self.trials} trials, "
-            f"took {self.total_elapsed:.3f}s"
+            f"Found {self.n:,}/{self.duration:.3f}s after {self.trials:,} "
+            f"trials (total time: {self.total_elapsed:.3f}s)"
         )
 
 
