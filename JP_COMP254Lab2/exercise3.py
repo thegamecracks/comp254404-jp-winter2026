@@ -73,14 +73,17 @@ def find_optimal_runtime(
     print(f"{duration = :.3f}s")
     print(f"Finding optimal runtime for {func.__name__}, max {max_trials} trials...")
 
+    # Various statistics to keep track
     trials = 0
     elapsed = 0.0
     last_mid = 0
     last_elapsed = 0.0
-    time_start = time.perf_counter()
+    started_at = time.perf_counter()
+
+    # Related to output formatting
     pad = math.ceil(math.log10(end)) + 2
 
-    # Below condition makes end exclusive, range is [start, end)
+    # Below condition makes end exclusive, so actual range is [start, end)
     while (mid := start + (end - start) // 2) != start:
         trials += 1
         _print_trial_start(trials, last_mid, mid)
@@ -103,7 +106,7 @@ def find_optimal_runtime(
         n=last_mid,
         duration=last_elapsed,
         trials=trials,
-        total_elapsed=time.perf_counter() - time_start,
+        total_elapsed=time.perf_counter() - started_at,
     )
 
 
