@@ -13,7 +13,7 @@ def main() -> None:
     results = find_optimal_runtime(
         unique1,
         start=DURATION * 500,  # hint: it's very slow!
-        end=DURATION * 4000,
+        end=DURATION * 5000,
         duration=DURATION,
     )
     print(results)
