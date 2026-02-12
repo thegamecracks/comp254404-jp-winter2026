@@ -35,6 +35,14 @@ followed if they are more convenient.
    ...
    ```
 
+> [!NOTE]
+>
+> If a script complains of missing dependencies, there may be newly declared
+> dependencies in pyproject.toml from a recently fetched commit.
+>
+> Try `pip install --editable .` to update the virtual environment,
+> and then run the desired script again.
+
 ### Alternative Setup (PYTHONPATH)
 
 Instead of venv+pip, you can set the [PYTHONPATH](https://docs.python.org/3/using/cmdline.html#envvar-PYTHONPATH)
@@ -54,6 +62,12 @@ $ export PYTHONPATH=/absolute/path/to/src
 This is not recommended, but can work in a pinch if creating a virtual environment
 is undesirable.
 
+> [!WARNING]
+>
+> Some exercises require third-party dependencies and will break
+> when using this method. This can be resolved by following setup
+> instructions for venv+pip or uv.
+
 ### Alternative Setup (uv)
 
 Instead of venv+pip, you can use Astral's [uv](https://docs.astral.sh/uv/) project manager
@@ -66,9 +80,11 @@ and use it to run a given script:
 ...
 ```
 
-Note that uv's venv creation will install the `dev` dependency group
-in pyproject.toml by default, which currently includes pytest,
-but those dependencies are not required to run any of the scripts.
+> [!NOTE]
+>
+> `uv run` will automatically sync the virtual environment whenever there are
+> changed dependencies. However, you can manually synchronize the venv with
+> `uv sync`.
 
 ## How to Export
 
