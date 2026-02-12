@@ -83,21 +83,12 @@ def find_optimal_runtime(
     # Below condition makes end exclusive, range is [start, end)
     while (mid := start + (end - start) // 2) != start:
         trials += 1
-        if last_mid > 0:
-            print(f"  {trials:2d}. {mid:,} ", end="", flush=True)
-        else:
-            print(f"  {trials:2d}. {mid:,} ", end="", flush=True)
+        _print_trial_start(trials, last_mid, mid)
 
         data = generate_unique_data(mid)
         elapsed = timed_call(func, data)
 
-        if last_mid and last_elapsed:
-            diff_mid = mid - last_mid
-            diff_elapsed = elapsed - last_elapsed
-            print(f"/ {elapsed:.3f}s  ({diff_mid:+{pad},d}, {diff_elapsed:+.3f}s)")
-        else:
-            print(f"/ {elapsed:.3f}s")
-
+        _print_trial_end(elapsed, last_mid, last_elapsed, pad, mid)
         last_mid = mid
         last_elapsed = elapsed
 
@@ -118,6 +109,28 @@ def find_optimal_runtime(
 
 def generate_unique_data(n: int) -> Sequence[int]:
     return range(n)  # no memory overhead
+
+
+def _print_trial_start(trials: int, last_mid: int, mid: int) -> None:
+    if last_mid > 0:
+        print(f"  {trials:2d}. {mid:,} ", end="", flush=True)
+    else:
+        print(f"  {trials:2d}. {mid:,} ", end="", flush=True)
+
+
+def _print_trial_end(
+    elapsed: float,
+    last_mid: int,
+    last_elapsed: float,
+    pad: int,
+    mid: int,
+) -> None:
+    if last_mid and last_elapsed:
+        diff_mid = mid - last_mid
+        diff_elapsed = elapsed - last_elapsed
+        print(f"/ {elapsed:.3f}s  ({diff_mid:+{pad},d}, {diff_elapsed:+.3f}s)")
+    else:
+        print(f"/ {elapsed:.3f}s")
 
 
 def timed_call(func: Callable[P, T], *args: P.args, **kwargs: P.kwargs) -> float:
