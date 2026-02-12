@@ -122,7 +122,9 @@ def find_optimal_runtime(
 
 
 def generate_unique_data(n: int) -> Sequence[int]:
-    return range(n)  # no memory overhead
+    # While the below sequence has no memory overhead, range is always sorted
+    # which inadvertently guarantees O(n) runtime for Timsort / Powersort.
+    return range(n)
 
 
 def _print_trial_start(trials: int, last_mid: int, mid: int) -> None:
