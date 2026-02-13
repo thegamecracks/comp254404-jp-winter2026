@@ -124,8 +124,7 @@ def record_benchmark(
         remaining = runtime.duration - total_elapsed
         if remaining <= 0:
             return print(
-                f"  Reached max runtime of {runtime.duration}s, "
-                f"terminating benchmark"
+                f"  Reached max runtime of {runtime.duration}s, terminating benchmark"
             )
         elif int(total_elapsed) > clock:
             print(f"  {n:{pad},}/{runtime.end:,}, {remaining:.1f}s left...")
