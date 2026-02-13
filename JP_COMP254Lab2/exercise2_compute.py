@@ -30,7 +30,7 @@ def main() -> None:
     parser.add_argument(
         "-n",
         "--runtime",
-        default="1e6/60s",
+        default="3e4/60s",
         help="The maximum N/time to test per function (default: %(default)s)",
         type=Runtime.from_str,
     )
