@@ -3,10 +3,12 @@
 import argparse
 import contextlib
 import csv
+import re
 import sys
 import time
 from pathlib import Path
-from typing import Any, Callable, Iterable, ParamSpec, Protocol, Sequence, TypeVar
+from dataclasses import dataclass
+from typing import Any, Callable, Iterable, ParamSpec, Protocol, Self, Sequence, TypeVar
 
 P = ParamSpec("P")
 T = TypeVar("T")
@@ -27,10 +29,10 @@ def main() -> None:
     )
     parser.add_argument(
         "-n",
-        "--end",
-        default="1e4",
-        help="The largest N to measure (default: %(default)s)",
-        type=lambda s: int(float(s)),
+        "--runtime",
+        default="1e6/60s",
+        help="The maximum N/time to test per function (default: %(default)s)",
+        type=Runtime.from_str,
     )
     parser.add_argument(
         "dest",
@@ -42,7 +44,7 @@ def main() -> None:
 
     args = parser.parse_args()
     force: bool = args.force
-    end: int = args.end
+    runtime: Runtime = args.runtime
     dest: Path = args.dest
 
     if dest.exists() and not force:
@@ -53,9 +55,9 @@ def main() -> None:
         writer = csv.writer(f)
         writer.writerow(["func", "n", "time"])
 
-        record_benchmark(prefix_average_1, writer=writer, end=end)
+        record_benchmark(prefix_average_1, writer=writer, runtime=runtime)
         print()
-        record_benchmark(prefix_average_2, writer=writer, end=end)
+        record_benchmark(prefix_average_2, writer=writer, runtime=runtime)
 
     elapsed = time.perf_counter() - start
     print(f"Finished benchmark after {elapsed:.3f}s, results written to {dest}")
@@ -82,6 +84,22 @@ def prefix_average_2(data: Sequence[float]) -> list[float]:
     return a
 
 
+@dataclass
+class Runtime:
+    end: int
+    duration: float
+
+    @classmethod
+    def from_str(cls, s: str) -> Self:
+        m = re.fullmatch(r"([\de]+)(?:/(\d+)s?)", s)
+        if m is None:
+            raise ValueError(f"Invalid format {s!r}, expected N/duration")
+        return cls(end=int(float(m[1])), duration=float(m[2]))
+
+    def __str__(self) -> str:
+        return f"n = {self.end:,} or {self.duration}s"
+
+
 class Writer(Protocol):
     def writerow(self, row: Iterable[Any], /) -> Any: ...
 
@@ -90,22 +108,27 @@ def record_benchmark(
     func: Callable[[Sequence[float]], Sequence[float]],
     *,
     writer: Writer,
-    end: int,
+    runtime: Runtime,
 ) -> None:
-    print(f"Benchmarking {func.__name__} up to n = {end:,}")
-    pad = len(format(end, ","))
+    print(f"Benchmarking {func.__name__} up to {runtime}")
+    pad = len(format(runtime.end, ","))
     start = time.perf_counter()
     clock = 0
 
-
-    for n in range(1, end):
+    for n in range(1, runtime.end):
         data = generate_unique_data(n)
         elapsed = timed_call(func, data)
         writer.writerow([func.__name__, n, elapsed])
 
         total_elapsed = time.perf_counter() - start
-        if int(total_elapsed) > clock:
-            print(f"  {n:{pad},}/{end:,}...")
+        remaining = runtime.duration - total_elapsed
+        if remaining <= 0:
+            return print(
+                f"  Reached max runtime of {runtime.duration}s, "
+                f"terminating benchmark"
+            )
+        elif int(total_elapsed) > clock:
+            print(f"  {n:{pad},}/{runtime.end:,}, {remaining:.1f}s left...")
             clock = int(total_elapsed)
 
 
