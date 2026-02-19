@@ -23,8 +23,8 @@ def main() -> None:
     )
     parser.add_argument(
         "source",
-        default=Path("."),
-        help="The source directory to search (default: %s)",
+        default=".",
+        help="The source directory to search (default: %(default)s)",
         nargs="?",
         type=Path,
     )
