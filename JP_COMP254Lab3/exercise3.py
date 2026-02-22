@@ -53,7 +53,7 @@ def find(
             directories.append(file)
 
     for d in directories:
-        find(d, filename)
+        find(d, filename, hidden=hidden)
 
 
 if __name__ == "__main__":
