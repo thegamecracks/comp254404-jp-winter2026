@@ -22,7 +22,7 @@ followed if they are more convenient.
 3. Create a virtual environment and install the package into it (venv+pip):
 
    ```sh
-   $ python -m venv
+   $ python -m venv .venv
    $ .venv\Scripts\activate  # on Linux/MacOS: $ source .venv/bin/activate
    (.venv) $ pip install --editable .
    ```
