@@ -2,16 +2,16 @@
 
 ## Structure
 
-Project directories are located in the repository root. Each project contains
-one or more Python scripts that can be run to perform a specific exercise or step,
-e.g. `python exercise1.py`.
+Project directories are located in the repository root. Each directory can
+either represent a Java project, or it can contain one or more Python scripts
+to perform a specific exercise or step, e.g. `python exercise1.py`.
 
 However, there are shared modules contained in an `src` directory providing
 my translations of data structures, and those modules need to be available
 to Python in order for the scripts to run correctly. See [Setup](#setup) below
 for instructions.
 
-## Setup
+## Python Setup
 
 This section describes a few different setups that can be followed.
 The steps below are the preferred method, but alternative setups can be
