@@ -33,6 +33,10 @@ build
 hs_err_pid*
 replay_pid*
 
+# https://docs.gradle.org/current/userguide/gradle_wrapper.html
+# This is expected to be checked into version control
+!gradle-wrapper.jar
+
 # ===== Python =====
 
 # Byte-compiled / optimized / DLL files
