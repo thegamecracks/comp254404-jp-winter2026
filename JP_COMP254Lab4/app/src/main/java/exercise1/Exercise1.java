@@ -5,7 +5,7 @@ import java.util.Iterator;
 import lists.Position;
 
 public class Exercise1 {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         JPLinkedPositionalList<String> list = new JPLinkedPositionalList<>();
 
         list.addLast("a");
