@@ -144,4 +144,25 @@ public interface PositionalList<E> extends Iterable<E> {
    * @return iterable collection of the list's positions
    */
   Iterable<Position<E>> positions();
+
+  /**
+   * Returns the index of the element at the given position.
+   * @param p The position to return the index of.
+   * @return The index of the position
+   * @throws IllegalArgumentException if p is not a valid position for this list
+   * @author thegamecracks
+   */
+  default int indexOf(Position<E> p) throws IllegalArgumentException {
+    int i = 0;
+    Iterator<Position<E>> it = positions().iterator();
+    while (it.hasNext()) {
+      Position<E> current = it.next();
+
+      if (current.equals(p))
+        return i;
+
+      i++;
+    }
+    throw new IllegalArgumentException("Position not in list");
+  }
 }

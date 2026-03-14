@@ -1,12 +1,13 @@
 package exercise1;
 
 import java.util.Iterator;
-
+import lists.LinkedPositionalList;
 import lists.Position;
+import lists.PositionalList;
 
 public class Exercise1 {
     public static void main(String[] args) {
-        JPLinkedPositionalList<String> list = new JPLinkedPositionalList<>();
+        PositionalList<String> list = new LinkedPositionalList<>();
 
         list.addLast("a");
         list.addLast("b");
