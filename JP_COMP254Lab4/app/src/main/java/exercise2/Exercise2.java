@@ -28,7 +28,7 @@ public class Exercise2 {
         System.out.printf("Stack B: %s\n", b);
     }
 
-    private static <E> void transfer(Stack<E> s, Stack<E> t) {
+    public static <E> void transfer(Stack<E> s, Stack<E> t) {
         while (!s.isEmpty()) t.push(s.pop());
     }
 }
