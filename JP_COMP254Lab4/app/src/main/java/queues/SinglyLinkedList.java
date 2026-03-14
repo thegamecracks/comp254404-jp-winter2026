@@ -234,6 +234,8 @@ public class SinglyLinkedList<E> implements Cloneable {
 
     other.head = null;
     other.tail = null;
+
+    this.size += other.size;
     other.size = 0;
   }
 }
