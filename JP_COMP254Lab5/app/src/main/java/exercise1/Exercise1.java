@@ -43,7 +43,7 @@ public class Exercise1 {
     }
 
     /**
-     * Return the next node in pre-order traversal.
+     * Return the next node of a binary tree in pre-order traversal.
      *
      * Worse-case running time is O(n).
      */
