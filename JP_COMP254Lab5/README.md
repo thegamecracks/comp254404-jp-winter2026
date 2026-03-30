@@ -21,16 +21,16 @@ Preorder:
 D4  E4  G4
 
 Subtree heights:
-      D4 (height: 0, depth: 3)
-      E4 (height: 0, depth: 3)
-    C3   (height: 1, depth: 2)
-      G4 (height: 0, depth: 3)
-    F3   (height: 1, depth: 2)
-  B2     (height: 2, depth: 1)
-    I3 (height: 0, depth: 2)
-    J3 (height: 0, depth: 2)
-  H2   (height: 1, depth: 1)
-A1       (height: 3, depth: 0)
+      D4 => 0
+      E4 => 0
+    C3   => 1
+      G4 => 0
+    F3   => 1
+  B2     => 2
+    I3 => 0
+    J3 => 0
+  H2   => 1
+A1       => 3
 
 
 ===== Exercise 3 =====

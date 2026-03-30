@@ -47,12 +47,11 @@ public class Exercise2 {
         int currentHeight = maxChildHeight + 1;
 
         System.out.printf(
-                "%s%s%s (height: %d, depth: %d)\n",
+                "%s%s%s => %d\n",
                 " ".repeat(depth * 2),
                 current.getElement(),
                 " ".repeat(currentHeight * 2),
-                currentHeight,
-                depth);
+                currentHeight);
 
         return currentHeight;
     }
