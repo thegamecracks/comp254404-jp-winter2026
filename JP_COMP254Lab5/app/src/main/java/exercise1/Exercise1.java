@@ -45,7 +45,8 @@ public class Exercise1 {
     /**
      * Return the next node of a binary tree in pre-order traversal.
      *
-     * Worse-case running time is O(n).
+     * Worst-case running time is O(n) if given an unbalanced tree, e.g. all
+     * nodes are on the left or on the right.
      */
     public static <E> Position<E> preorderNext(BinaryTree<E> tree, Position<E> p) {
         // If this is an internal node, continue traversing down.
