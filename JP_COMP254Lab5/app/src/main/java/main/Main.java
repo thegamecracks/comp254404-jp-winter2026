@@ -1,0 +1,18 @@
+package main;
+
+import exercise1.Exercise1;
+import exercise2.Exercise2;
+import exercise3.Exercise3;
+
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("===== Exercise 1 =====");
+        Exercise1.main(args);
+
+        System.out.println("\n===== Exercise 2 =====");
+        Exercise2.main(args);
+
+        System.out.println("\n===== Exercise 3 =====");
+        Exercise3.main(args);
+    }
+}
