@@ -50,15 +50,25 @@ public abstract class AbstractHashMap<K,V> extends AbstractMap<K,V> {
   private int prime;                   // prime factor
   private long scale, shift;           // the shift and scaling factors
 
+  private double loadFactor;           // load factor
+
   /** Creates a hash table with the given capacity and prime factor. */
-  public AbstractHashMap(int cap, int p) {
+  public AbstractHashMap(int cap, int p, double load) {
+    if (load <= 0 || load >= 1)
+      throw new IllegalArgumentException(
+          String.format("load factor must be within (0, 1), not %f", load));
+
     prime = p;
     capacity = cap;
+    loadFactor = load;
     Random rand = new Random();
     scale = rand.nextInt(prime-1) + 1;
     shift = rand.nextInt(prime);
     createTable();
   }
+
+  /** Creates a hash table with the given capacity and prime factor. */
+  public AbstractHashMap(int cap, int p) { this(cap, p, 0.5); }
 
   /** Creates a hash table with given capacity and prime factor 109345121. */
   public AbstractHashMap(int cap) { this(cap, 109345121); }  // default prime
@@ -103,8 +113,21 @@ public abstract class AbstractHashMap<K,V> extends AbstractMap<K,V> {
   @Override
   public V put(K key, V value) {
     V answer = bucketPut(hashValue(key), key, value);
-    if (n > capacity / 2)              // keep load factor <= 0.5
-      resize(2 * capacity - 1);        // (or find a nearby prime)
+
+    // if (n > capacity / 2)              // keep load factor <= 0.5
+    //   resize(2 * capacity - 1);        // (or find a nearby prime)
+    int threshold = (int) (loadFactor * capacity);
+    if (threshold >= capacity)
+      throw new ArithmeticException(
+          String.format(
+              "Unexpected load threshold %d with factor %f, must be below capacity %d",
+              threshold, loadFactor, capacity));
+
+    if (n >= threshold) {
+      int newCap = (int) Math.ceil(capacity / loadFactor);
+      resize(newCap);
+    }
+
     return answer;
   }
 
