@@ -12,24 +12,33 @@ Reusing configuration cache.
 
 > Task :app:run
 ===== Exercise 1 =====
-Benchmarking ChainHashMap with load factor 0.1...
-  Completed in 476ms
-Benchmarking ChainHashMap with load factor 0.2...
-  Completed in 413ms
-Benchmarking ChainHashMap with load factor 0.3...
-  Completed in 487ms
-Benchmarking ChainHashMap with load factor 0.4...
-  Completed in 548ms
-Benchmarking ChainHashMap with load factor 0.5...
-  Completed in 631ms
-Benchmarking ChainHashMap with load factor 0.6...
-  Completed in 529ms
-Benchmarking ChainHashMap with load factor 0.7...
-  Completed in 717ms
-Benchmarking ChainHashMap with load factor 0.8...
-  Completed in 388ms
-Benchmarking ChainHashMap with load factor 0.9...
-  Completed in 549ms
+Benchmarking ChainHashMap with load factor 0.1... (10/10)
+  Completed 10 runs in 2,412ms
+  Fastest run: 197ms
+Benchmarking ChainHashMap with load factor 0.2... (10/10)
+  Completed 10 runs in 2,302ms
+  Fastest run: 179ms
+Benchmarking ChainHashMap with load factor 0.3... (10/10)
+  Completed 10 runs in 2,727ms
+  Fastest run: 227ms
+Benchmarking ChainHashMap with load factor 0.4... (10/10)
+  Completed 10 runs in 1,947ms
+  Fastest run: 146ms
+Benchmarking ChainHashMap with load factor 0.5... (10/10)
+  Completed 10 runs in 2,279ms
+  Fastest run: 182ms
+Benchmarking ChainHashMap with load factor 0.6... (10/10)
+  Completed 10 runs in 2,666ms
+  Fastest run: 219ms
+Benchmarking ChainHashMap with load factor 0.7... (10/10)
+  Completed 10 runs in 2,898ms
+  Fastest run: 242ms
+Benchmarking ChainHashMap with load factor 0.8... (10/10)
+  Completed 10 runs in 1,892ms
+  Fastest run: 134ms
+Benchmarking ChainHashMap with load factor 0.9... (10/10)
+  Completed 10 runs in 2,085ms
+  Fastest run: 155ms
 
 ===== Exercise 2 =====
 Does map contain 123? false
@@ -47,7 +56,7 @@ Removed 'null' at key 123
 Does map contain 123? false
 What is the value at 123? null
 
-BUILD SUCCESSFUL in 5s
-2 actionable tasks: 2 executed
+BUILD SUCCESSFUL in 22s
+2 actionable tasks: 1 executed, 1 up-to-date
 Configuration cache entry reused.
 ```
