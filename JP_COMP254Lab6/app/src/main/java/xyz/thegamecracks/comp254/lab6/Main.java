@@ -7,8 +7,5 @@ public class Main {
 
         System.out.println("\n===== Exercise 2 =====");
         Exercise2.main(args);
-
-        System.out.println("\n===== Exercise 3 =====");
-        Exercise3.main(args);
     }
 }
