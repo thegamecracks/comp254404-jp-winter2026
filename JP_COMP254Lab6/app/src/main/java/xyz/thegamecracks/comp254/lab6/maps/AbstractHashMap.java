@@ -124,7 +124,8 @@ public abstract class AbstractHashMap<K,V> extends AbstractMap<K,V> {
               threshold, loadFactor, capacity));
 
     if (n >= threshold) {
-      int newCap = (int) Math.ceil(capacity / loadFactor);
+      // int newCap = (int) Math.ceil(capacity / loadFactor);
+      int newCap = capacity * 2;
       resize(newCap);
     }
 
