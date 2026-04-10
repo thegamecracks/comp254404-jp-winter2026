@@ -13,32 +13,33 @@ Reusing configuration cache.
 > Task :app:run
 ===== Exercise 1 =====
 Benchmarking ChainHashMap with load factor 0.1... (10/10)
-  Completed 10 runs in 2,412ms
-  Fastest run: 197ms
+  Completed 10 runs in 2,365ms
+  Fastest run: 188ms
 Benchmarking ChainHashMap with load factor 0.2... (10/10)
-  Completed 10 runs in 2,302ms
-  Fastest run: 179ms
+  Completed 10 runs in 2,403ms
+  Fastest run: 177ms
 Benchmarking ChainHashMap with load factor 0.3... (10/10)
-  Completed 10 runs in 2,727ms
-  Fastest run: 227ms
+  Completed 10 runs in 2,572ms
+  Fastest run: 215ms
 Benchmarking ChainHashMap with load factor 0.4... (10/10)
-  Completed 10 runs in 1,947ms
-  Fastest run: 146ms
+  Completed 10 runs in 2,392ms
+  Fastest run: 176ms
 Benchmarking ChainHashMap with load factor 0.5... (10/10)
-  Completed 10 runs in 2,279ms
-  Fastest run: 182ms
+  Completed 10 runs in 2,297ms
+  Fastest run: 195ms
 Benchmarking ChainHashMap with load factor 0.6... (10/10)
-  Completed 10 runs in 2,666ms
-  Fastest run: 219ms
+  Completed 10 runs in 2,396ms
+  Fastest run: 197ms
 Benchmarking ChainHashMap with load factor 0.7... (10/10)
-  Completed 10 runs in 2,898ms
-  Fastest run: 242ms
+  Completed 10 runs in 3,024ms
+  Fastest run: 217ms
 Benchmarking ChainHashMap with load factor 0.8... (10/10)
-  Completed 10 runs in 1,892ms
-  Fastest run: 134ms
+  Completed 10 runs in 1,799ms
+  Fastest run: 148ms
 Benchmarking ChainHashMap with load factor 0.9... (10/10)
-  Completed 10 runs in 2,085ms
-  Fastest run: 155ms
+  Completed 10 runs in 1,866ms
+  Fastest run: 157ms
+Fastest load factor: 0.8 (148ms)
 
 ===== Exercise 2 =====
 Does map contain 123? false
@@ -57,6 +58,6 @@ Does map contain 123? false
 What is the value at 123? null
 
 BUILD SUCCESSFUL in 22s
-2 actionable tasks: 1 executed, 1 up-to-date
+2 actionable tasks: 2 executed
 Configuration cache entry reused.
 ```
