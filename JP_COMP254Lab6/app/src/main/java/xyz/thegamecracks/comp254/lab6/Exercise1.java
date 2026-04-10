@@ -40,18 +40,19 @@ public class Exercise1 {
         long totalStart = System.currentTimeMillis();
 
         for (int iteration = 0; iteration < N_REPEAT; iteration++) {
-            System.out.printf("Benchmarking ChainHashMap with load factor %.1f... (%2d/%2d)\r", loadFactor,
-                    iteration + 1, N_REPEAT);
-            AbstractHashMap<Integer, Integer> map = new ChainHashMap<>(CAPACITY, PRIME, loadFactor);
+            System.out.printf(
+                    "Benchmarking ChainHashMap with load factor %.1f... (%2d/%2d)\r",
+                    loadFactor, iteration + 1, N_REPEAT);
 
             long start = System.currentTimeMillis();
+            AbstractHashMap<Integer, Integer> map = new ChainHashMap<>(CAPACITY, PRIME, loadFactor);
             for (int value = 0; value < N_ENTRIES; value++) {
                 map.put(RAND.nextInt(), value);
             }
-
             long elapsed = System.currentTimeMillis() - start;
+
             fastest = Math.min(fastest, elapsed);
-            // System.out.printf("    %d. %dms\n", iteration + 1, elapsed);
+            /* System.out.printf("    %d. %dms\n", iteration + 1, elapsed); */
         }
         System.out.println();
 
