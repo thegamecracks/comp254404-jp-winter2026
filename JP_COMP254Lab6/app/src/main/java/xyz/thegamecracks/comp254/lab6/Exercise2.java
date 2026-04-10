@@ -24,6 +24,5 @@ public class Exercise2 {
         System.out.printf("Removed '%s' at key 123\n", map.remove(123));
         System.out.printf("Does map contain 123? %s\n", map.containKey(123));
         System.out.printf("What is the value at 123? %s\n", map.get(123));
-        System.out.println();
     }
 }
