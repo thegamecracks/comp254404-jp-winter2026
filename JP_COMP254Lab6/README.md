@@ -8,5 +8,46 @@
 
 ```java
 $ gradlew run
-// TODO: add program output
+Reusing configuration cache.
+
+> Task :app:run
+===== Exercise 1 =====
+Benchmarking ChainHashMap with load factor 0.1...
+  Completed in 296ms
+Benchmarking ChainHashMap with load factor 0.2...
+  Completed in 384ms
+Benchmarking ChainHashMap with load factor 0.3...
+  Completed in 393ms
+Benchmarking ChainHashMap with load factor 0.4...
+  Completed in 468ms
+Benchmarking ChainHashMap with load factor 0.5...
+  Completed in 639ms
+Benchmarking ChainHashMap with load factor 0.6...
+  Completed in 1064ms
+Benchmarking ChainHashMap with load factor 0.7...
+  Completed in 1322ms
+Benchmarking ChainHashMap with load factor 0.8...
+  Completed in 1898ms
+Benchmarking ChainHashMap with load factor 0.9...
+  Completed in 3578ms
+
+===== Exercise 2 =====
+Does map contain 123? false
+What is the value at 123? null
+
+Added 'Hello world!' at key 123
+Does map contain 123? true
+What is the value at 123? Hello world!
+
+Replaced 'Hello world!' with null
+Does map contain 123? true
+What is the value at 123? null
+
+Removed 'null' at key 123
+Does map contain 123? false
+What is the value at 123? null
+
+BUILD SUCCESSFUL in 11s
+2 actionable tasks: 2 executed
+Configuration cache entry reused.
 ```
