@@ -15,4 +15,4 @@ dependencies = [
 classifiers = ["Private :: Do Not Upload"]
 
 [dependency-groups]
-dev = ["pytest>=9.0.2"]
+dev = ["pytest>=9.0.3"]
