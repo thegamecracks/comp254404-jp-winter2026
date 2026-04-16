@@ -74,21 +74,25 @@ class Tree(ABC, Generic[E]):
             yield from self._preorder(child)
 
 
-class LinkedNode(Position, Generic[E_co]):
+class LinkedBinaryNode(Position, Generic[E_co]):
     def __init__(
         self,
         element: E_co,
         *,
         parent: Self | None,
-        children: list[Self],
+        left: Self | None,
+        right: Self | None,
     ) -> None:
         super().__init__()
         self._element = element
         self._parent = parent
-        self._children = children
+        self._left = left
+        self._right = right
 
     def __repr__(self) -> str:
-        return f"<{type(self).__name__} element={self.element!r} children={len(self._children)}>"
+        left = str(self._left) if self._left is not None else "None"
+        right = str(self._right) if self._right is not None else "None"
+        return f"<{type(self).__name__} element={self.element!r} left={left} right={right}>"
 
     def __str__(self) -> str:
         return str(self.element)
@@ -98,8 +102,8 @@ class LinkedNode(Position, Generic[E_co]):
         return self._element
 
 
-class LinkedTree(Tree[E], Generic[E]):
-    _root: LinkedNode[E] | None
+class LinkedBinaryTree(Tree[E], Generic[E]):
+    _root: LinkedBinaryNode[E] | None
     _size: int
 
     def __init__(self) -> None:
@@ -111,29 +115,44 @@ class LinkedTree(Tree[E], Generic[E]):
         return f"<{type(self).__name__} root={self.root!r} size={self.size}>"
 
     @property
-    def root(self) -> LinkedNode[E] | None:
+    def root(self) -> LinkedBinaryNode[E] | None:
         return self._root
 
     @property
     def size(self) -> int:
         return self._size
 
-    def parent(self, p: LinkedNode[E], /) -> LinkedNode[E] | None:  # type: ignore
+    def parent(self, p: LinkedBinaryNode[E], /) -> LinkedBinaryNode[E] | None:  # type: ignore
         return p._parent
 
-    def children(self, p: LinkedNode[E], /) -> Iterable[LinkedNode[E]]:  # type: ignore
-        yield from p._children
+    def children(self, p: LinkedBinaryNode[E], /) -> Iterable[LinkedBinaryNode[E]]:  # type: ignore
+        if p._left is not None:
+            yield p._left
+        if p._right is not None:
+            yield p._right
 
-    def add_root(self, e: E) -> LinkedNode[E]:
+    def add_root(self, e: E) -> LinkedBinaryNode[E]:
         if self._root is not None:
             raise ValueError("Tree is not empty")
 
-        self._root = LinkedNode(e, parent=None, children=[])
+        self._root = LinkedBinaryNode(e, parent=None, left=None, right=None)
         self._size += 1
         return self._root
 
-    def add_child(self, p: LinkedNode[E], e: E) -> LinkedNode[E]:
-        node = LinkedNode(e, parent=p, children=[])
-        p._children.append(node)
+    def add_left(self, p: LinkedBinaryNode[E], e: E) -> LinkedBinaryNode[E]:
+        if p._left is not None:
+            raise ValueError("Node already has a left child")
+
+        node = LinkedBinaryNode(e, parent=p, left=None, right=None)
+        p._left = node
+        self._size += 1
+        return node
+
+    def add_right(self, p: LinkedBinaryNode[E], e: E) -> LinkedBinaryNode[E]:
+        if p._right is not None:
+            raise ValueError("Node already has a right child")
+
+        node = LinkedBinaryNode(e, parent=p, left=None, right=None)
+        p._right = node
         self._size += 1
         return node

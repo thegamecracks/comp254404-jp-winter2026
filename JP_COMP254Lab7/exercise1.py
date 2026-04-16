@@ -6,7 +6,7 @@ from contextlib import suppress
 from dataclasses import dataclass
 from typing import Generic, TypeVar
 
-from trees import Position, Tree, LinkedTree
+from trees import Position, Tree, LinkedBinaryTree
 
 K = TypeVar("K")
 V = TypeVar("V")
@@ -22,11 +22,11 @@ class Entry(Generic[K, V]):
 def main() -> None:
     # Create a heavily unbalanced tree
     # (must exceed recursion limit of 1000)
-    tree = LinkedTree[Entry[int, str]]()
+    tree = LinkedBinaryTree[Entry[int, str]]()
 
     leaf = tree.add_root(Entry(1, "Root node"))
     for i in range(2, 1001):
-        leaf = tree.add_child(leaf, Entry(i, f"Node {i}"))
+        leaf = tree.add_right(leaf, Entry(i, f"Node {i}"))
 
     print("Tree:", tree)
     print("Last leaf:", leaf)
