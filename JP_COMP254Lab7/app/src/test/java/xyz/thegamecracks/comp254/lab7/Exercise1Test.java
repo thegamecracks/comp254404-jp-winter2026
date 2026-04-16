@@ -1,10 +1,10 @@
-package xyz.thegamecracks.comp254.lab6;
+package xyz.thegamecracks.comp254.lab7;
 
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class Exercise2Test {
+class Exercise1Test {
     @Test void appHasAGreeting() {
     }
 }
