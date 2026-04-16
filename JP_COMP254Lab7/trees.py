@@ -156,3 +156,9 @@ class LinkedBinaryTree(Tree[E], Generic[E]):
         p._right = node
         self._size += 1
         return node
+
+    def left(self, p: LinkedBinaryNode[E]) -> LinkedBinaryNode[E] | None:
+        return p._left
+
+    def right(self, p: LinkedBinaryNode[E]) -> LinkedBinaryNode[E] | None:
+        return p._right

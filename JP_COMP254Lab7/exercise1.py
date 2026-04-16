@@ -2,11 +2,11 @@
 #
 # Usage: python exercise1.py
 # Requires: Python 3.11+
-from contextlib import suppress
+from collections import deque
 from dataclasses import dataclass
 from typing import Generic, TypeVar
 
-from trees import Position, Tree, LinkedBinaryTree
+from trees import LinkedBinaryNode, LinkedBinaryTree
 
 K = TypeVar("K")
 V = TypeVar("V")
@@ -19,80 +19,128 @@ class Entry(Generic[K, V]):
     value: V
 
 
+LBT = LinkedBinaryTree[Entry[int, str]]
+LBN = LinkedBinaryNode[Entry[int, str]]
+
+
 def main() -> None:
-    # Create a heavily unbalanced tree
-    # (must exceed recursion limit of 1000)
-    tree = LinkedBinaryTree[Entry[int, str]]()
+    # Create a balanced tree
+    balanced, balanced_leaf = create_balanced_search_tree()
+    unbalanced, unbalanced_leaf = create_unbalanced_search_tree()
 
-    leaf = tree.add_root(Entry(1, "Root node"))
-    for i in range(2, 1001):
-        leaf = tree.add_right(leaf, Entry(i, f"Node {i}"))
+    print("Balanced Search Tree")
+    print("====================")
+    test_tree(balanced, balanced_leaf)
 
-    print("Tree:", tree)
-    print("Last leaf:", leaf)
+    print()
+    print("Unbalanced Search Tree")
+    print("======================")
+    test_tree(unbalanced, unbalanced_leaf)
+
+
+def test_tree(tree: LBT, leaf: LBN) -> None:
+    print(tree)
+    print("Last leaf                  :", leaf)
     check_depth_height_recursion_limit(tree, leaf)
     check_recursive_tree_search(tree, leaf.element.key)
     check_iterative_tree_search(tree, leaf.element.key)
 
 
-def check_depth_height_recursion_limit(tree: Tree[K], leaf: Position[K]) -> None:
-    print("Testing tree depth and height")
+def create_balanced_search_tree() -> tuple[LBT, LBN]:
+    tree = LBT()
+    entries = [Entry(i, f"Node {i}") for i in range(1, 2048)]
 
-    if not tree.is_external(leaf):
+    # https://www.geeksforgeeks.org/dsa/sorted-array-to-balanced-bst/
+    mid = (len(entries) - 1) // 2
+    root = tree.add_root(entries[mid])
+
+    queue: deque[tuple[LBN, int, int]] = deque()
+    queue.append((root, 0, len(entries) - 1))
+
+    while queue:
+        node, start, end = queue.popleft()
+        mid = (start + end) // 2
+        if start < mid:
+            i = (start + mid - 1) // 2
+            left = tree.add_left(node, entries[i])
+            queue.append((left, start, mid - 1))
+        if end > mid:
+            i = (mid + end + 1) // 2
+            right = tree.add_right(node, entries[i])
+            queue.append((right, mid + 1, end))
+
+    return tree, node  # type: ignore  # node should always be bound
+
+
+def create_unbalanced_search_tree() -> tuple[LBT, LBN]:
+    tree = LBT()
+    leaf = tree.add_root(Entry(1, "Root node"))
+    for i in range(2, 2048):
+        leaf = tree.add_right(leaf, Entry(i, f"Node {i}"))
+    return tree, leaf
+
+
+def check_depth_height_recursion_limit(tree: LBT, leaf: LBN) -> None:
+    if tree.root is None:
+        raise ValueError("Tree does not have a root node")
+    elif not tree.is_external(leaf):
         raise ValueError(f"Expected leaf node, got {leaf}")
 
-    with suppress(RecursionError):
-        n = tree.depth(leaf)
-        raise RuntimeError(f"Expected tree.depth to exceed recursion limit, got {n}")
+    try:
+        depth = tree.depth(leaf)
+    except RecursionError:
+        print("tree.depth(leaf)           : RecursionError")
+    else:
+        print(f"tree.depth(leaf)           : {depth}")
 
-    with suppress(RecursionError):
-        n = tree.height(tree.root)
-        raise RuntimeError(f"Expected tree.height to exceed recursion limit, got {n}")
+    try:
+        height = tree.height(tree.root)
+    except RecursionError:
+        print("tree.height(root)          : RecursionError")
+    else:
+        print(f"tree.height(root)          : {height}")
 
-    print("  Passed! tree.depth and tree.height raised RecursionError")
 
-
-def check_recursive_tree_search(tree: Tree[Entry[K, V]], key: K) -> None:
-    print("Testing recursive tree search")
-
+def check_recursive_tree_search(tree: LBT, key: int) -> None:
     if tree.root is None:
         raise ValueError("Tree does not have a root node")
 
-    with suppress(RecursionError):
+    try:
         p = recursive_tree_search(tree, tree.root, key)
-        raise RuntimeError(
-            f"Expected recursive tree search to exceed recursion limit, got {p}"
-        )
+    except RecursionError:
+        print(f"recursive_tree_search({key}): RecursionError")
+    else:
+        print(f"recursive_tree_search({key}): {p}")
 
-    print("  Passed! recursive_tree_search() raised RecursionError")
 
-
-def check_iterative_tree_search(tree: Tree[Entry[K, V]], key: K) -> None:
-    print("Testing iterative tree search")
-
+def check_iterative_tree_search(tree: LBT, key: int) -> None:
     if tree.root is None:
         raise ValueError("Tree does not have a root node")
 
     p = iterative_tree_search(tree, tree.root, key)
 
-    print(f"  Passed! iterative_tree_search() returned {p}")
+    print(f"iterative_tree_search({key}): {p}")
 
 
-def recursive_tree_search(
-    tree: Tree[Entry[K, V]],
-    p: Position[Entry[K, V]],
-    key: K,
-) -> Position[Entry[K, V]] | None:
-    if tree.is_external(p):
+def recursive_tree_search(tree: LBT, p: LBN | None, key: int) -> LBN | None:
+    if p is None or tree.is_external(p):
         return p
 
+    if p.element.key == key:
+        return p
+    elif key < p.element.key:
+        return recursive_tree_search(tree, tree.left(p), key)
+    else:
+        return recursive_tree_search(tree, tree.right(p), key)
 
-def iterative_tree_search(
-    tree: Tree[Entry[K, V]],
-    p: Position[Entry[K, V]],
-    key: K,
-) -> Position[Entry[K, V]] | None:
-    pass
+
+def iterative_tree_search(tree: LBT, p: LBN | None, key: int) -> LBN | None:
+    while p is not None and p.element.key != key and not tree.is_external(p):
+        if key < p.element.key:
+            p = tree.left(p)
+        else:
+            p = tree.right(p)
+    return p
 
 
 if __name__ == "__main__":
