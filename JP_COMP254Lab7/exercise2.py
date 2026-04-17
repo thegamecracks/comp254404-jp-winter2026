@@ -117,8 +117,6 @@ def merge_sort(data: list[int]) -> list[int]:
 
     if len(runs) < 1:
         return []
-    elif len(runs) == 1:
-        return list(runs.popleft())
 
     i = 1
     while len(runs) > 1:
