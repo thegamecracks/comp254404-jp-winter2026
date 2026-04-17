@@ -24,7 +24,6 @@ LBN = LinkedBinaryNode[Entry[int, str]]
 
 
 def main() -> None:
-    # Create a balanced tree
     balanced, balanced_leaf = create_balanced_search_tree()
     unbalanced, unbalanced_leaf = create_unbalanced_search_tree()
 
