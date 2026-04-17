@@ -68,6 +68,10 @@ def main() -> None:
 
     print(f"Fastest run: {fastest * 1000:,.3f}ms")
 
+    data = generate_shuffled_data(number)
+    ground_truth, _ = timed(sorted, data)
+    print(f"(Powersort for reference: {ground_truth * 1000:,.3f}ms)")
+
 
 def setup_logging(verbose: int) -> None:
     if verbose:
